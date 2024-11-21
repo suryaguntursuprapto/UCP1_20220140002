@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Kolam Renang</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+
+        .add {
+            background-color: #008CBA;
+            color: white;
+        }
+
+        .edit {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .delete {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Data Kolam Renang</h1>
+
+    <!-- Form untuk Menambah Kolam Renang -->
+    <div class="form-container">
+        <h2>Tambah Kolam Renang</h2>
+        <form action="/pools" method="POST">
+            <input type="text" name="name" placeholder="Nama Kolam" required />
+            <input type="text" name="location" placeholder="Lokasi" required />
+            <input type="number" name="price" placeholder="Harga" required />
+            <button type="submit" class="button add">Tambah Kolam</button>
+        </form>
+    </div>
+
+    <!-- Tabel Kolam Renang -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nama</th>
+                <th>Lokasi</th>
+                <th>Harga</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% pools.forEach(pool => { %>
+                <tr>
+                    <td><%= pool.id %></td>
+                    <td><%= pool.name %></td>
+                    <td><%= pool.location %></td>
+                    <td><%= pool.price %></td>
+                    <td>
+                        <a href="/pools/edit/<%= pool.id %>" class="button edit">Edit</a>
+                        <!-- Tombol Delete -->
+                        <a href="/pools/delete/<%= pool.id %>" class="button delete">Delete</a>
+
+                    </td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+
+</html>
